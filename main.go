@@ -11,25 +11,18 @@ import (
 
 func main() {
 	var repos []string
+	var prefixes []string
 	if file, err := os.ReadFile("./input/repos"); err != nil {
 		panic(err)
 	} else {
 		ls := strings.Split(string(file), "\n")
 		for _, l := range ls {
 			if l != "" {
-				repos = append(repos, l)
-			}
-		}
-	}
-
-	var prefixes []string
-	if file, err := os.ReadFile("./input/prefixes"); err != nil {
-		panic(err)
-	} else {
-		ls := strings.Split(string(file), "\n")
-		for _, l := range ls {
-			if l != "" {
-				prefixes = append(prefixes, l)
+				if strings.Contains(l, "/") {
+					repos = append(repos, l)
+				} else {
+					prefixes = append(prefixes, l)
+				}
 			}
 		}
 	}
